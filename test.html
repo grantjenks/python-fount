@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Live Page Prototype</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+    <script>
+     function clicker() {
+         socket.send('clicked');
+     }
+
+     function convert(value) {
+         if (typeof value === 'string' || value instanceof String) {
+             return value;
+         }
+         else if (value instanceof Array) {
+             return value.map(convert);
+         }
+         if (value['tag'] == 'button' && value['props']['type'] == 'button') {
+             value['props']['onClick'] = clicker;
+         }
+         return React.createElement(
+             value['tag'],
+             value['props'],
+             convert(value['children'])
+         );
+     }
+
+     var socket = new WebSocket('ws://127.0.0.1:8080/socket');
+     socket.onmessage = function (event) {
+         var message = JSON.parse(event.data);
+         var element = convert(message);
+         ReactDOM.render(element, document.getElementById('root'));
+     };
+    </script>
+  </body>
+</html>
