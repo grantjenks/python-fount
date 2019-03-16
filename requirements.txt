@@ -1,0 +1,4 @@
+aiohttp
+cchardet
+aiohttp-devtools
+aiodns

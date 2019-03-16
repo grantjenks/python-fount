@@ -86,5 +86,6 @@ async def websocket_handler(request):
 
 app.add_routes([web.get('/socket', websocket_handler)])
 
+
 if __name__ == '__main__':
     web.run_app(app)
