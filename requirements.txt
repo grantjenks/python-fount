@@ -1,4 +1,7 @@
-aiohttp
-cchardet
-aiohttp-devtools
 aiodns
+aiohttp
+aiohttp-devtools
+cchardet
+channels
+channels_redis
+django=2.2b1
