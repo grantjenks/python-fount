@@ -1,4 +1,4 @@
-"""Proof-of-concept Server for Live Web Pages
+"""Proof-of-concept web framework for creating single-page applications.
 
 $ adev runserver server.py -p 8080
 
