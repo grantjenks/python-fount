@@ -91,7 +91,7 @@ html_theme_options = {
     'show_powered_by': False,
     'show_related': True,
     'github_user': 'grantjenks',
-    'github_repo': 'python-runstats',
+    'github_repo': 'python-fount',
     'github_type': 'star',
 }
 
