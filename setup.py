@@ -21,7 +21,7 @@ with open('README.rst') as reader:
 setup(
     name=fount.__title__,
     version=fount.__version__,
-    description='Fount -- Web Framework for Live Server Pages',
+    description='Python web framework for single-page applications.',
     long_description=readme,
     author='Grant Jenks',
     author_email='contact@grantjenks.com',
