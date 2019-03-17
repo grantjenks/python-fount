@@ -6,6 +6,7 @@ channels
 channels_redis
 django==2.2b1
 gj
+pylint
 sphinx
 twine
 wheel
