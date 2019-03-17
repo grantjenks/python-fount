@@ -89,3 +89,11 @@ app.add_routes([web.get('/socket', websocket_handler)])
 
 if __name__ == '__main__':
     web.run_app(app)
+
+
+__title__ = 'fount'
+__version__ = '0.1.0'
+__build__ = 0x000100
+__author__ = 'Grant Jenks'
+__copyright__ = '2019, Grant Jenks'
+__license__ = 'Apache 2.0'
