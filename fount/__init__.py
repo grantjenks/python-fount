@@ -1,6 +1,19 @@
-"""Proof-of-concept web framework for creating single-page applications.
+"""Fount
 
-$ adev runserver server.py -p 8080
+Web framework for creating single-page applications.
+
+Design ideas:
+
+  - Use asyncio.Queue for incoming messages.
+  - One page should support multiple connected websockets.
+  - Render a page once then broadcast to all connected websockets.
+  - Run a page by consuming messages from queue.
+  - Trigger updates at 60 FPS as needed.
+
+How to handle scale?
+
+  * Ultimately this is just PUB/SUB  with an HTML model.
+  * There should be optimizations for 60 FPS.
 
 """
 
@@ -9,16 +22,25 @@ import json
 import asyncio
 from aiohttp import web
 
-async def hello(request):
-    return web.Response(text="Hello, world")
-
-app = web.Application()
-app.add_routes([web.get('/', hello)])
-
 
 class Page:
     def __init__(self, ws):
-        self.ws = ws
+        self.queue = asyncio.Queue()
+
+    async def open(self, websocket):
+        pass
+
+    async def onmessage(self, message):
+        pass
+
+    async def connect(self, websocket):
+        self.connections.add(websocket)
+
+    async def setup(self):
+        pass
+
+    async def run(self):
+        await self.setup()
 
     async def update(self):
         doc = self.content()
@@ -75,19 +97,16 @@ class DemoPage(Page):
 
 
 async def websocket_handler(request):
-
     ws = web.WebSocketResponse()
     await ws.prepare(request)
-
     page = DemoPage(ws)
     await page.run()
-
     return ws
-
-app.add_routes([web.get('/socket', websocket_handler)])
 
 
 if __name__ == '__main__':
+    app = web.Application()
+    app.add_routes([web.get('/socket', websocket_handler)])
     web.run_app(app)
 
 
