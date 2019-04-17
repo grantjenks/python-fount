@@ -29,6 +29,7 @@ Features
    - 100% test coverage
    - Used in production at ???
    - Tested on CPython 3.5, 3.6, 3.7 and PyPy3
+   - Compare with https://github.com/flexxui/flexx
 
    .. image:: https://api.travis-ci.org/grantjenks/python-fount.svg?branch=master
       :target: http://www.grantjenks.com/docs/fount/
