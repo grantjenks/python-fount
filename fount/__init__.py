@@ -17,43 +17,45 @@ How to handle scale?
 
 """
 
+import abc
 import aiohttp
 import json
 import asyncio
 from aiohttp import web
 
 
-class Page:
-    def __init__(self, ws):
+class Fount:
+    @classmethod
+    async def create(cls):
+        self = cls()
         self.queue = asyncio.Queue()
+        self.pipes = set()
 
-    async def open(self, websocket):
+    async def connect(self, pipe):
+        self.pipes.add(pipe)
+
+    async def receive(self, message):
+        await self.queue.put(message)
+
+    async def disconnect(self, pipe):
+        self.pipes.remove(pipe)
+
+    async def destroy(self):
         pass
 
-    async def onmessage(self, message):
-        pass
-
-    async def connect(self, websocket):
-        self.connections.add(websocket)
-
-    async def setup(self):
-        pass
+    async def send(self, message):
+        pass  # TODO: broadcast
 
     async def run(self):
-        await self.setup()
+        pass  # TODO: process messages in queue
 
-    async def update(self):
-        doc = self.content()
-        message = json.dumps(doc)
-        await self.ws.send_str(message)
-
-    def content(self):
-        raise NotImplementedError
-
+    async def render(self):
+        pass  # TODO: generate json
+    
 
 class DemoPage(Page):
     def __init__(self, ws):
-        super().__init__(ws)
+        self.ws = ws
         self.seconds = 0
         self.clicked = 0
 
@@ -66,6 +68,11 @@ class DemoPage(Page):
             self.clicked += 1
             await self.update()
         ticker.cancel()
+
+    async def update(self):
+        doc = self.content()
+        message = json.dumps(doc)
+        await self.ws.send_str(message)
 
     async def tick(self):
         while True:
