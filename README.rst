@@ -10,6 +10,19 @@ single-page applications.
      different endpoints (micro-services!)
    - Support Django Channels, aiohttp, and others.
    - Support rendering as HTML for initial-load and fallback.
+   - Add connect() api to Page which starts task to handle incoming messages,
+     then update() broadcasts to all connected sockets.
+   - Convert HTML to JSON on update().
+   - Allow multiple components to share same websocket connection.
+   - Use an asyncio queue for compatibility and publish/subscribe.
+     - Scaling is a pub/sub problem. Would it work to make the queue external?
+       - How would Google pub-sub work here?
+     - Have input queue and output queue, output queue is drained at 60 FPS.
+   - Page should have multiple Component(s) and a single web socket connection.
+   - Messages should refer to Component using tag name, tag id, and tag class
+     properties.
+   - Events on the client side should be identified by component id then tag
+     name, tag id, and tag class properties.
 
 Testimonials
 ------------
