@@ -23,6 +23,8 @@ single-page applications.
      properties.
    - Events on the client side should be identified by component id then tag
      name, tag id, and tag class properties.
+   - See also: https://anvil.works/
+   - See also: https://github.com/flexxui/flexx
 
 Testimonials
 ------------
