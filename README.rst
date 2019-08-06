@@ -45,6 +45,7 @@ Features
    - Used in production at ???
    - Tested on CPython 3.5, 3.6, 3.7 and PyPy3
    - Compare with https://github.com/flexxui/flexx
+   - Compare with https://www.reddit.com/r/Python/comments/cljawn/library_for_making_desktop_apps_like_react/
 
    .. image:: https://api.travis-ci.org/grantjenks/python-fount.svg?branch=master
       :target: http://www.grantjenks.com/docs/fount/
