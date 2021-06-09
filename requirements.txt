@@ -4,7 +4,7 @@ aiohttp-devtools
 cchardet
 channels
 channels_redis
-django==2.2.13
+django==2.2.22
 doc8
 gj
 pylint
