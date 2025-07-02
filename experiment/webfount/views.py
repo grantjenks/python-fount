@@ -56,7 +56,7 @@ async def proxy_entry(request: HttpRequest, path: str = ""):
     prev_html = await load_page(sid) or ""
 
     if request.method == "POST":
-        body = await request.body
+        body = request.body
         data = urllib.parse.parse_qs(body.decode())
         new_html = await fetch_backend("POST", path, data=data)
     else:
@@ -103,13 +103,14 @@ async def admin_sessions(request: HttpRequest):
     return JsonResponse({"sessions": sids})
 
 
+@csrf_exempt
 async def admin_edit(request: HttpRequest, sid: str):
     html = await load_page(sid)
     if html is None:
         raise Http404()
 
     if request.method == "POST":
-        new_html = (await request.body).decode()
+        new_html = request.body.decode()
         diff = dmp.diff_main(html, new_html)
         dmp.diff_cleanupSemantic(diff)
         patch = dmp.patch_make(html, new_html, diff)
@@ -121,7 +122,7 @@ async def admin_edit(request: HttpRequest, sid: str):
     # GET => editable page
     editable = (
         "<!doctype html><title>Admin edit</title>"
-        "<h1>Editing session {sid}</h1>"
+        f"<h1>Editing session {sid}</h1>"
         "<div id='editor' contenteditable='true' style='border:1px solid'>"
         f"{html}"
         "</div>"
