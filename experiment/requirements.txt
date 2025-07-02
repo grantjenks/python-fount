@@ -1,0 +1,8 @@
+diff-match-patch
+django==5.2.*
+flask
+gunicorn
+htmx
+httpx
+redis
+uvicorn
